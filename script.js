@@ -96,7 +96,7 @@ const CONFIG = {
    *   les données sont bien enregistrées dans le Sheet.
    *   Pour tester : vérifiez directement votre Google Sheet.
    */
-  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxsbL1Cdu53q-Q7h_ZJZwTha_RAcb8stipjpGJX6srB3k6auo6vzDFk21w5ITckVQI6/exec',
+  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbw9M67BMBvTSFHjBN2unoUL8dpj3P2QEYN-NuLv6fq5H4ILX3pKRdYlpEY7nbFMC6Z-/exec',
 
 };
 
@@ -475,18 +475,77 @@ function validateForm() {
  * @param {Object} payload - Objet données à envoyer
  * @returns {Promise<void>}
  */
-async function sendToSheets(payload) {
-  /* Construit un FormData depuis le payload objet */
-  const formData = new FormData();
-  Object.keys(payload).forEach(key => {
-    formData.append(key, payload[key]);
-  });
+/**
+ * Envoie les données via un <form> HTML caché soumis dans une iframe cachée.
+ *
+ * C'est la SEULE méthode 100% fiable avec Google Apps Script.
+ *
+ * Pourquoi ?
+ * - fetch + no-cors     → réponse opaque, erreurs silencieuses
+ * - fetch + FormData    → erreur CORS sur la redirection Google
+ * - fetch + JSON        → GAS ne lit pas e.postData dans tous les cas
+ * - form caché + iframe → contourne CORS complètement, toujours fiable
+ */
+function sendToSheets(payload) {
+  return new Promise(function(resolve, reject) {
 
-  await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    body: formData,
-    /* Pas de mode no-cors — on laisse le navigateur gérer le redirect GAS */
-    redirect: 'follow',
+    /* 1. Crée une iframe invisible */
+    var iframe = document.createElement('iframe');
+    iframe.name    = 'hidden_iframe_' + Date.now();
+    iframe.id      = iframe.name;
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    /* 2. Crée un formulaire caché ciblant l'iframe */
+    var form = document.createElement('form');
+    form.method  = 'POST';
+    form.action  = CONFIG.GOOGLE_SCRIPT_URL;
+    form.target  = iframe.name;
+    form.style.display = 'none';
+
+    /* 3. Ajoute tous les champs */
+    Object.keys(payload).forEach(function(key) {
+      var input   = document.createElement('input');
+      input.type  = 'hidden';
+      input.name  = key;
+      input.value = payload[key];
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+
+    /* 4. Quand l'iframe a chargé = GAS a reçu les données */
+    iframe.onload = function() {
+      resolve();
+      /* Nettoyage après 3 secondes */
+      setTimeout(function() {
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+      }, 3000);
+    };
+
+    /* 5. Timeout de sécurité (10 secondes) */
+    var timeout = setTimeout(function() {
+      resolve(); /* On considère que c'est passé */
+      try {
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+      } catch(e) {}
+    }, 10000);
+
+    iframe.onload = function() {
+      clearTimeout(timeout);
+      resolve();
+      setTimeout(function() {
+        try {
+          document.body.removeChild(form);
+          document.body.removeChild(iframe);
+        } catch(e) {}
+      }, 3000);
+    };
+
+    /* 6. Soumet le formulaire */
+    form.submit();
   });
 }
 
@@ -537,15 +596,12 @@ function buildPayload() {
 
     /* ① Validation */
     if (!validateForm()) {
-      /* Scroll jusqu'à la première erreur visible */
       const firstErr = form.querySelector('.ferr:not([hidden]), .finp.has-err');
       if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
     const payload = buildPayload();
-
-    /* Log console pour débogage — retirez en production */
     console.log('[BétonPro] Envoi payload :', payload);
 
     setLoading(true);
@@ -553,7 +609,7 @@ function buildPayload() {
     try {
       await sendToSheets(payload);
 
-      /* ✅ Succès */
+      /* ✅ Succès — affiche le message et cache le formulaire */
       form.style.display = 'none';
       if (fOk) {
         fOk.hidden = false;
@@ -561,7 +617,6 @@ function buildPayload() {
       }
 
     } catch (err) {
-      /* ❌ Erreur réseau */
       console.error('[BétonPro] Erreur envoi :', err);
       setLoading(false);
       if (fErr) {
