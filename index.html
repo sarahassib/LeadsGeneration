@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BétonPro — Centrales à Béton Industrielles</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts : Oswald (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- Config Tailwind personnalisée -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#C8181A',
+            'brand-hov': '#A01214',
+          },
+          
+          },
+        }
+      }
+    
+  </script>
+
+  <!-- Feuille de style -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="font-body bg-black text-white">
+
+  <!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+  <header id="site-header" class="site-header">
+    <div class="hdr-inner">
+
+      <!-- ░░ LOGO ░░
+         Remplacez src="" par le chemin de votre logo.
+         Si src est vide, le texte fallback s'affiche automatiquement.
+         Exemple : src="assets/logo.png"
+    -->
+      <a href="#accueil" class="logo-link" aria-label="BétonPro — Accueil">
+        <img id="logo-img" src="" alt="Logo BétonPro" class="logo-img" />
+        <span id="logo-txt" class="logo-txt font-display">BÉTON<span class="text-brand">PRO</span></span>
+      </a>
+
+      <!-- Navigation desktop -->
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="#accueil" class="nav-lnk">Accueil</a>
+        <a href="#presentation" class="nav-lnk">Présentation</a>
+        <a href="#devis" class="nav-lnk">Demande de devis</a>
+        <a href="#contact" class="nav-lnk">Contact</a>
+      </nav>
+
+      <!-- CTA + Burger -->
+      <div class="hdr-right">
+        <a href="#devis" class="btn-red hidden sm:inline-flex">Demande de devis</a>
+        <button id="burger" class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mob-nav">
+          <span class="bline" id="b1"></span>
+          <span class="bline" id="b2"></span>
+          <span class="bline" id="b3"></span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Navigation mobile -->
+    <nav id="mob-nav" class="mob-nav" aria-hidden="true" aria-label="Navigation mobile">
+      <a href="#accueil" class="mob-lnk font-display">Accueil</a>
+      <a href="#presentation" class="mob-lnk font-display">Présentation</a>
+      <a href="#devis" class="mob-lnk font-display">Demande de devis</a>
+      <a href="#contact" class="mob-lnk font-display">Contact</a>
+      <a href="#devis" class="btn-red mt-3 text-center block">Demande de devis</a>
+    </nav>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════
+     SECTION 1 — HERO / SLIDER
+═══════════════════════════════════════ -->
+  <section id="accueil" class="hero" aria-label="Accueil">
+
+    <!-- Slides background-image — définis dans style.css -->
+    <!--
+    ░░░░ EMPLACEMENTS IMAGES DU SLIDER ░░░░
+    Les images sont configurées dans style.css.
+    Recherchez les classes .slide-1 / .slide-2 / .slide-3
+    et remplacez les URL par vos propres images.
+    Format conseillé : JPEG ou WebP, min 1920 × 1080 px.
+  -->
+    <div class="slider" id="slider" aria-live="polite">
+      <div class="slide slide-1" data-idx="0"></div>
+      <div class="slide slide-2" data-idx="1"></div>
+      <div class="slide slide-3" data-idx="2"></div>
+    </div>
+
+    <!-- Overlay dégradé -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <!-- Contenu — aligné à gauche -->
+    <div class="hero-body">
+      <p class="hero-eyebrow font-display">Centrales à béton industrielles</p>
+      <h1 class="hero-h1 font-display">
+        L'EXCELLENCE<br />DU BÉTON<br />
+        <span class="text-brand">INDUSTRIEL</span>
+      </h1>
+      <p class="hero-sub">
+        Équipements haute performance pour la production de béton prêt à l'emploi.
+        Solutions complètes pour BTP, contractants et revendeurs.
+      </p>
+      <div class="hero-btns">
+        <a href="#devis" class="btn-red">Demande de devis</a>
+        <a href="#presentation" class="btn-ghost">Nos solutions →</a>
+      </div>
+    </div>
+
+    <!-- Contrôles slider -->
+    <div class="slider-ctrl" aria-label="Navigation du slider">
+      <button class="s-arr" id="s-prev" aria-label="Slide précédente">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+      <div class="s-dots" id="s-dots" role="tablist">
+        <button class="s-dot s-dot-on" data-to="0" role="tab" aria-label="Slide 1" aria-selected="true"></button>
+        <button class="s-dot" data-to="1" role="tab" aria-label="Slide 2" aria-selected="false"></button>
+        <button class="s-dot" data-to="2" role="tab" aria-label="Slide 3" aria-selected="false"></button>
+      </div>
+      <button class="s-arr" id="s-next" aria-label="Slide suivante">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Barre de progression -->
+    <div class="prog-track" aria-hidden="true">
+      <div class="prog-bar" id="prog-bar"></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+     SECTION 2 — PRÉSENTATION
+═══════════════════════════════════════ -->
+  <section id="presentation" class="sec-light" aria-labelledby="h-pres">
+    <div class="sec-wrap">
+
+      <div class="sec-head fade-up">
+        <span class="eyebrow font-display">À propos de BétonPro</span>
+        <h2 id="h-pres" class="sec-title font-display text-black">
+          VOTRE PARTENAIRE<br /><span class="text-brand">INDUSTRIEL DE CONFIANCE</span>
+        </h2>
+      </div>
+
+      <!-- 2 colonnes : texte / image -->
+      <div class="pres-grid">
+
+        <div class="pres-txt fade-up">
+          <div class="red-bar"></div>
+          <p class="text-gray-700 text-lg leading-relaxed mb-5">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+          </p>
+          <p class="text-gray-500 leading-relaxed mb-5">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum.
+          </p>
+          <p class="text-gray-500 leading-relaxed mb-8">
+            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+            dolores eos qui ratione voluptatem sequi nesciunt.
+          </p>
+
+          <ul class="feats" aria-label="Points forts">
+            <li class="feat-item">
+              <span class="feat-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                </svg></span>
+              <span>Haute capacité de production</span>
+            </li>
+            <li class="feat-item">
+              <span class="feat-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                </svg></span>
+              <span>Livraison clé en main</span>
+            </li>
+            <li class="feat-item">
+              <span class="feat-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                </svg></span>
+              <span>SAV réactif 7j/7</span>
+            </li>
+            <li class="feat-item">
+              <span class="feat-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                </svg></span>
+              <span>Solutions de financement disponibles</span>
+            </li>
+          </ul>
+
+          <a href="#devis" class="btn-red mt-8 inline-flex">Obtenir un devis gratuit</a>
+        </div>
+
+        <!-- ░░ EMPLACEMENT IMAGE PRÉSENTATION ░░
+           Remplacez src par le chemin de votre image.
+           Dimensions recommandées : min 900 × 680 px
+      -->
+        <div class="pres-img-wrap fade-up">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80"
+            alt="Centrale à béton industrielle" class="pres-img" loading="lazy" />
+          <div class="pres-badge font-display">
+            <span class="badge-n">600<sup>+</sup></span>
+            <span class="badge-l">m³ / jour</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-bar fade-up">
+        <div class="stat-col">
+          <p class="stat-n font-display">500<span class="text-brand">+</span></p>
+          <p class="stat-l">Centrales installées</p>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-col">
+          <p class="stat-n font-display">20<span class="text-brand">+</span></p>
+          <p class="stat-l">Années d'expérience</p>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-col">
+          <p class="stat-n font-display">40<span class="text-brand">+</span></p>
+          <p class="stat-l">Pays servis</p>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-col">
+          <p class="stat-n font-display">98<span class="text-brand">%</span></p>
+          <p class="stat-l">Clients satisfaits</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+     SECTION 3 — NOS GAMMES
+═══════════════════════════════════════ -->
+  <section id="gammes" class="sec-dark" aria-labelledby="h-gammes">
+    <div class="sec-wrap">
+
+      <div class="sec-head text-center fade-up">
+        <span class="eyebrow font-display">Nos gammes</span>
+        <h2 id="h-gammes" class="sec-title font-display text-white">
+          4 TYPES DE Produits<br /><span class="text-brand">Produits</span>
+        </h2>
+        <p class="sec-sub">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio, neque culpa voluptas doloribus sed
+          tenetur dolorum enim sequi voluptate reprehenderit minus adipisci, praesentium error ex fugit laudantium
+          repudiandae delectus. Tempora. </p>
+      </div>
+
+      <div class="gammes-grid">
+
+        <!-- Carte 1 — Chantier -->
+        <article class="g-card fade-up">
+          <!-- ░░ EMPLACEMENT IMAGE — Centrale chantier ░░ -->
+          <div class="g-img-wrap">
+            <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&q=80"
+              alt="Centrale à béton chantier" class="g-img" loading="lazy" />
+            <span class="g-tag font-display">produit 1</span>
+          </div>
+          <div class="g-body">
+            <h3 class="g-title font-display">XXXXX XXXXXX XXXXXXX</h3>
+            <p class="g-desc">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis fuga similique molestias ab animi
+              expedita temporibus nulla cupiditate, exercitationem dolor, quasi illum impedit, architecto reiciendis
+              porro iste iusto dolorum? Aliquid. </p>
+            <a href="#devis" class="btn-g font-display">Demande de devis</a>
+          </div>
+        </article>
+
+        <!-- Carte 2 — Mobile -->
+        <article class="g-card fade-up g-delay-1">
+          <!-- ░░ EMPLACEMENT IMAGE — Centrale mobile ░░ -->
+          <div class="g-img-wrap">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80"
+              alt="Centrale à béton mobile" class="g-img" loading="lazy" />
+            <span class="g-tag g-tag-red font-display">Produit 2</span>
+          </div>
+          <div class="g-body">
+            <h3 class="g-title font-display">XXXXX XXXXXX XXXXXXX</h3>
+            <p class="g-desc">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis fuga similique molestias ab animi
+              expedita temporibus nulla cupiditate, exercitationem dolor, quasi illum impedit, architecto reiciendis
+              porro iste iusto dolorum? Aliquid. </p>
+            <a href="#devis" class="btn-g font-display">Demande de devis</a>
+          </div>
+        </article>
+
+        <!-- Carte 3 — Modulaire compacte -->
+        <article class="g-card fade-up g-delay-2">
+          <!-- ░░ EMPLACEMENT IMAGE — Modulaire compacte ░░ -->
+          <div class="g-img-wrap">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80"
+              alt="Centrale à béton modulaire compacte" class="g-img" loading="lazy" />
+            <span class="g-tag font-display">Produits 3</span>
+          </div>
+          <div class="g-body">
+            <h3 class="g-title font-display">XXXXX XXXXXX XXXXXXX</h3>
+            <p class="g-desc">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis fuga similique molestias ab animi
+              expedita temporibus nulla cupiditate, exercitationem dolor, quasi illum impedit, architecto reiciendis
+              porro iste iusto dolorum? Aliquid.
+            </p>
+            <a href="#devis" class="btn-g font-display">Demande de devis</a>
+          </div>
+        </article>
+
+        <!-- Carte 4 — Modulaire linéaire -->
+        <article class="g-card fade-up g-delay-3">
+          <!-- ░░ EMPLACEMENT IMAGE — Modulaire linéaire ░░ -->
+          <div class="g-img-wrap">
+            <img src="https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?w=600&q=80"
+              alt="Centrale à béton modulaire linéaire" class="g-img" loading="lazy" />
+            <span class="g-tag font-display">Produit 4</span>
+          </div>
+          <div class="g-body">
+            <h3 class="g-title font-display">XXXXX XXXXXX XXXXXXX</h3>
+            <p class="g-desc">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis fuga similique molestias ab animi
+              expedita temporibus nulla cupiditate, exercitationem dolor, quasi illum impedit, architecto reiciendis
+              porro iste iusto dolorum? Aliquid.
+            </p>
+            <a href="#devis" class="btn-g font-display">Demande de devis</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+     SECTION 4 — FORMULAIRE DE DEVIS
+═══════════════════════════════════════ -->
+  <section id="devis" class="sec-form" aria-labelledby="h-form">
+    <div class="sec-wrap">
+
+      <div class="form-hdr fade-up">
+        <span class="eyebrow font-display">Demande de devis</span>
+        <h2 id="h-form" class="sec-title font-display text-white">
+          OBTENEZ VOTRE OFFRE<br /><span class="text-brand">PERSONNALISÉE</span>
+        </h2>
+        <p class="form-intro">
+          Répondez aux questions ci-dessous. Notre équipe vous contacte sous 24h avec une proposition adaptée à vos
+          besoins.
+        </p>
+      </div>
+
+      <div class="form-card fade-up">
+        <form id="lead-form" novalidate aria-label="Formulaire de demande de devis">
+
+          <!-- ─── Q1 Accordion ─── -->
+          <div class="acc" data-name="q1">
+            <button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-q1" id="btn-q1">
+              <span class="acc-n font-display">01</span>
+              <div class="acc-mid">
+                <span class="acc-q">Quelle est la raison de votre demande ?</span>
+                <span class="acc-v" id="v-q1" aria-live="polite"></span>
+              </div>
+              <svg class="acc-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div id="p-q1" class="acc-panel" role="region" aria-labelledby="btn-q1" hidden>
+              <div class="acc-opts opts-col">
+                <label class="opt"><input type="radio" name="q1" value="Achat urgent" /><span class="opt-txt">🔴 Achat
+                    urgent — je dois m'équiper rapidement</span></label>
+                <label class="opt"><input type="radio" name="q1" value="Projet confirmé" /><span class="opt-txt">📋
+                    Projet confirmé — je compare les options / j'attends des offres</span></label>
+                <label class="opt"><input type="radio" name="q1" value="Projet à préparer" /><span class="opt-txt">📐
+                    Projet à préparer — étude / validation interne / budget en cours</span></label>
+                <label class="opt"><input type="radio" name="q1" value="Partenaire revendeur" /><span class="opt-txt">🤝
+                    Je souhaite introduire vos produits à mes clients (partenaire)</span></label>
+                <label class="opt"><input type="radio" name="q1" value="Candidature" /><span class="opt-txt">💼 Je
+                    cherche un travail (candidature)</span></label>
+                <label class="opt"><input type="radio" name="q1" value="Simple renseignement" /><span class="opt-txt">ℹ️
+                    Je me renseigne — pas de projet immédiat</span></label>
+              </div>
+            </div>
+            <p class="ferr" id="e-q1" role="alert" hidden>Veuillez sélectionner une option.</p>
+          </div>
+
+          <!-- ─── Q2 Accordion ─── -->
+          <div class="acc" data-name="q2">
+            <button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-q2" id="btn-q2">
+              <span class="acc-n font-display">02</span>
+              <div class="acc-mid">
+                <span class="acc-q">Sous quel délai envisagez-vous une décision ?</span>
+                <span class="acc-v" id="v-q2" aria-live="polite"></span>
+              </div>
+              <svg class="acc-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div id="p-q2" class="acc-panel" role="region" aria-labelledby="btn-q2" hidden>
+              <div class="acc-opts opts-row">
+                <label class="opt"><input type="radio" name="q2" value="0–30 jours" /><span class="opt-txt">0–30
+                    jours</span></label>
+                <label class="opt"><input type="radio" name="q2" value="1–3 mois" /><span class="opt-txt">1–3
+                    mois</span></label>
+                <label class="opt"><input type="radio" name="q2" value="3–6 mois" /><span class="opt-txt">3–6
+                    mois</span></label>
+                <label class="opt"><input type="radio" name="q2" value="+6 mois" /><span class="opt-txt">+6
+                    mois</span></label>
+                <label class="opt opt-wide"><input type="radio" name="q2" value="Pas de délai clair" /><span
+                    class="opt-txt">Pas de délai clair pour le moment</span></label>
+              </div>
+            </div>
+            <p class="ferr" id="e-q2" role="alert" hidden>Veuillez sélectionner une option.</p>
+          </div>
+
+          <!-- ─── Q3 Accordion ─── -->
+          <div class="acc" data-name="q3">
+            <button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-q3" id="btn-q3">
+              <span class="acc-n font-display">03</span>
+              <div class="acc-mid">
+                <span class="acc-q">Volume de production journalier souhaité (m³/jour)</span>
+                <span class="acc-v" id="v-q3" aria-live="polite"></span>
+              </div>
+              <svg class="acc-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div id="p-q3" class="acc-panel" role="region" aria-labelledby="btn-q3" hidden>
+              <div class="acc-opts opts-row">
+                <label class="opt"><input type="radio" name="q3" value="< 100 m³/j" /><span class="opt-txt">&lt;
+                    100</span></label>
+                <label class="opt"><input type="radio" name="q3" value="100–300 m³/j" /><span
+                    class="opt-txt">100–300</span></label>
+                <label class="opt"><input type="radio" name="q3" value="300–600 m³/j" /><span
+                    class="opt-txt">300–600</span></label>
+                <label class="opt"><input type="radio" name="q3" value="+600 m³/j" /><span
+                    class="opt-txt">+600</span></label>
+              </div>
+            </div>
+            <p class="ferr" id="e-q3" role="alert" hidden>Veuillez sélectionner une option.</p>
+          </div>
+
+          <!-- Séparateur -->
+          <div class="f-sep"></div>
+
+          <!-- ─── Coordonnées ─── -->
+          <fieldset class="coords">
+            <legend class="coords-leg font-display">Vos coordonnées</legend>
+            <div class="fgrid">
+
+              <div class="fg fg-full">
+                <label class="flbl" for="fe-co">Nom de l'entreprise <span class="req">*</span></label>
+                <input type="text" id="fe-co" name="entreprise" class="finp" placeholder="Votre société"
+                  autocomplete="organization" required />
+                <p class="ferr" id="e-co" role="alert" hidden>Champ obligatoire.</p>
+              </div>
+
+              <div class="fg">
+                <label class="flbl" for="fe-nm">Nom complet <span class="req">*</span></label>
+                <input type="text" id="fe-nm" name="nom" class="finp" placeholder="Prénom et nom" autocomplete="name"
+                  required />
+                <p class="ferr" id="e-nm" role="alert" hidden>Champ obligatoire.</p>
+              </div>
+
+              <div class="fg">
+                <label class="flbl" for="fe-em">Adresse e-mail <span class="req">*</span></label>
+                <input type="email" id="fe-em" name="email" class="finp" placeholder="vous@entreprise.com"
+                  autocomplete="email" required />
+                <p class="ferr" id="e-em" role="alert" hidden>E-mail invalide.</p>
+              </div>
+
+              <div class="fg">
+                <label class="flbl" for="fe-tl">Numéro de téléphone <span class="req">*</span></label>
+                <input type="tel" id="fe-tl" name="telephone" class="finp" placeholder="+212 619 62 95 38"
+                  autocomplete="tel" required />
+                <p class="ferr" id="e-tl" role="alert" hidden>Numéro invalide.</p>
+              </div>
+
+              <div class="fg">
+                <label class="flbl" for="fe-wa">Numéro WhatsApp</label>
+                <input type="tel" id="fe-wa" name="whatsapp" class="finp" placeholder="+212 619 62 95 38 (si différent)"
+                  autocomplete="tel" />
+              </div>
+
+              <div class="fg">
+                <label class="flbl" for="fe-vi">Ville <span class="req">*</span></label>
+                <input type="text" id="fe-vi" name="ville" class="finp" placeholder="Votre ville"
+                  autocomplete="address-level2" required />
+                <p class="ferr" id="e-vi" role="alert" hidden>Champ obligatoire.</p>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <p class="rgpd">
+            En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour vous contacter dans le
+            cadre de votre demande. Aucune donnée ne sera revendue à des tiers.
+          </p>
+
+          <button type="submit" id="sub-btn" class="btn-sub font-display">
+            <span id="sub-lbl">Envoyer ma demande de devis</span>
+            <svg id="sub-spin" class="spin-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" hidden>
+              <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.25)" stroke-width="3" />
+              <path d="M12 2a10 10 0 0 1 10 10" stroke="white" stroke-width="3" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <!-- Succès -->
+          <div id="f-ok" class="f-ok" role="status" hidden>
+            <div class="ok-ico">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <p class="ok-title font-display">Demande envoyée avec succès !</p>
+            <p class="ok-msg">Notre équipe vous contactera sous 24h. Merci de votre intérêt.</p>
+          </div>
+
+          <!-- Erreur serveur -->
+          <div id="f-err" class="f-err-box" role="alert" hidden>
+            Une erreur est survenue. Veuillez réessayer ou nous contacter directement.
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+     SECTION 5 — CONTACT
+═══════════════════════════════════════ -->
+  <section id="contact" class="sec-contact" aria-labelledby="h-contact">
+    <div class="sec-wrap">
+
+      <div class="text-center mb-14 fade-up">
+        <span class="eyebrow font-display">Contact</span>
+        <h2 id="h-contact" class="sec-title font-display text-white">
+          PARLONS DE VOTRE<br /><span class="text-brand">PROJET</span>
+        </h2>
+      </div>
+
+      <div class="contact-grid">
+
+        <address class="ci-wrap fade-up">
+
+          <div class="ci-item">
+            <div class="ci-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"
+                  fill="white" />
+              </svg>
+            </div>
+            <div>
+              <p class="ci-lbl font-display">Adresse</p>
+              <p class="ci-val">123 Zone Industrielle,<br />Casablanca 20000, Maroc</p>
+            </div>
+          </div>
+
+          <div class="ci-item">
+            <div class="ci-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                  fill="white" />
+              </svg>
+            </div>
+            <div>
+              <p class="ci-lbl font-display">Téléphone</p>
+              <a href="tel:+21250000000" class="ci-val ci-lnk">+212 619 62 95 38</a>
+              <a href="tel:+21260000000" class="ci-val ci-lnk">+212 619 62 95 38</a>
+            </div>
+          </div>
+
+          <div class="ci-item">
+            <div class="ci-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                  fill="white" />
+              </svg>
+            </div>
+            <div>
+              <p class="ci-lbl font-display">E-mail</p>
+              <a href="mailto:contact@betonpro.ma" class="ci-val ci-lnk">contact@betonpro.ma</a>
+            </div>
+          </div>
+
+          <div class="ci-item">
+            <div class="ci-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm.5 15H11v-6l5.25 3.15.75-1.23L12.5 11V7h-1v6l5.25 3.15.75-1.23L12.5 13V7z"
+                  fill="none" />
+                <path
+                  d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23L12.5 13V7z"
+                  fill="white" />
+              </svg>
+            </div>
+            <div>
+              <p class="ci-lbl font-display">Horaires</p>
+              <p class="ci-val">Lun–Ven : 08h00 – 18h00</p>
+              <p class="ci-val">Samedi : 09h00 – 13h00</p>
+            </div>
+          </div>
+
+          <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" class="btn-wa font-display">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.524 5.843L.057 23.5l5.815-1.452A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.659-.5-5.191-1.378l-.372-.22-3.454.862.877-3.374-.241-.385A9.946 9.946 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+            </svg>
+            Contacter sur WhatsApp
+          </a>
+
+        </address>
+
+        <!-- ░░ EMPLACEMENT GOOGLE MAPS ░░
+           1. Ouvrez maps.google.com
+           2. Cherchez votre adresse
+           3. Cliquez Partager → Intégrer une carte
+           4. Copiez le src du code iframe généré et remplacez ci-dessous
+      -->
+        <div class="map-wrap fade-up">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106376.78!2d-7.66944!3d33.58988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7d282b6b2e6c7%3A0x4bf6e87c1dd98059!2sCasablanca!5e0!3m2!1sfr!2sfr!4v1699999999999"
+            title="Localisation BétonPro" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="foot-inner">
+
+      <div class="foot-logo">
+        <img src="" alt="Logo BétonPro" class="logo-img" />
+        <span class="logo-txt font-display">BÉTON<span class="text-brand">PRO</span></span>
+      </div>
+
+      <p class="foot-copy">
+        © <span id="yr"></span> BétonPro. Tous droits réservés. — Centrales à béton industrielles.
+      </p>
+
+      <nav class="foot-links" aria-label="Liens légaux">
+        <a href="#" class="foot-lnk">Mentions légales</a>
+        <a href="#" class="foot-lnk">Confidentialité</a>
+      </nav>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
