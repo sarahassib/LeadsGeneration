@@ -450,15 +450,15 @@ ul {
    Exemple : url('assets/hero-1.jpg')
 ───────────────────────────────────────────── */
 .slide-1 {
-  background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=85');
+  background-image: url('Assets/2.png');
 }
 
 .slide-2 {
-  background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1920&q=85');
+  background-image: url('Assets/6.png');
 }
 
 .slide-3 {
-  background-image: url('https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=1920&q=85');
+  background-image: url('Assets/7.png');
 }
 
 /* Overlay sombre */
