@@ -359,8 +359,35 @@ const CONFIG = {
     }
   });
 
+  /* ── Logique show/hide Q2, Q3, séparateur, coordonnées ── */
+  const q2Acc = document.querySelector('.acc[data-name="q2"]');
+  const q3Acc = document.querySelector('.acc[data-name="q3"]');
+  const fSep = document.querySelector('.f-sep');
+  const coordsField = document.querySelector('.coords');
+  const hideTargets = [q2Acc, q3Acc, fSep, coordsField].filter(Boolean);
+
+  function updateFormVisibility() {
+    const q1Checked = document.querySelector('input[name="q1"]:checked');
+    const val = q1Checked ? q1Checked.value : '';
+    const shouldHide = (val === 'Candidature' || val === 'Fournisseur');
+
+    hideTargets.forEach(el => {
+      el.classList.toggle('hidden-q', shouldHide);
+    });
+  }
+
+  /* Écoute les changements sur Q1 */
+  document.querySelectorAll('input[name="q1"]').forEach(radio => {
+    radio.addEventListener('change', updateFormVisibility);
+  });
+
   /* Export pour validation */
   window._ACCS = ACCS;
+  window._isQ1HideMode = function() {
+    const q1Checked = document.querySelector('input[name="q1"]:checked');
+    const val = q1Checked ? q1Checked.value : '';
+    return val === 'Candidature' || val === 'Fournisseur';
+  };
 }());
 
 
@@ -401,21 +428,30 @@ function setInpErr(id, hasErr) {
 /** Valide tout le formulaire. Retourne true si valide. */
 function validateForm() {
   let ok = true;
+  const hideMode = window._isQ1HideMode ? window._isQ1HideMode() : false;
 
   /* Q1 */
   const q1 = radioVal('q1');
   showErr('e-q1', !q1);
   if (!q1) ok = false;
 
-  /* Q2 */
-  const q2 = radioVal('q2');
-  showErr('e-q2', !q2);
-  if (!q2) ok = false;
+  /* Q2 — ignoré si Candidature ou Fournisseur */
+  if (!hideMode) {
+    const q2 = radioVal('q2');
+    showErr('e-q2', !q2);
+    if (!q2) ok = false;
+  } else {
+    showErr('e-q2', false);
+  }
 
-  /* Q3 */
-  const q3 = radioVal('q3');
-  showErr('e-q3', !q3);
-  if (!q3) ok = false;
+  /* Q3 — ignoré si Candidature ou Fournisseur */
+  if (!hideMode) {
+    const q3 = radioVal('q3');
+    showErr('e-q3', !q3);
+    if (!q3) ok = false;
+  } else {
+    showErr('e-q3', false);
+  }
 
   /* Entreprise */
   const co = document.getElementById('fe-co').value.trim();
@@ -554,11 +590,12 @@ function sendToSheets(payload) {
  * @returns {Object}
  */
 function buildPayload() {
+  const hideMode = window._isQ1HideMode ? window._isQ1HideMode() : false;
   return {
     timestamp: new Date().toISOString(),
     q1: radioVal('q1') || '',
-    q2: radioVal('q2') || '',
-    q3: radioVal('q3') || '',
+    q2: hideMode ? '' : (radioVal('q2') || ''),
+    q3: hideMode ? '' : (radioVal('q3') || ''),
     entreprise: document.getElementById('fe-co').value.trim() || '',
     nom: document.getElementById('fe-nm').value.trim() || '',
     email: document.getElementById('fe-em').value.trim() || '',

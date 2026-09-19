@@ -1023,6 +1023,9 @@ ul {
   margin: 1.5rem 0;
 }
 
+/* Éléments cachés dynamiquement (candidature / fournisseur) */
+.hidden-q { display: none !important; }
+
 /* Coordonnées */
 .coords {
   border: none;

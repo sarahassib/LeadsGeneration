@@ -401,13 +401,15 @@
                     cherche un travail (candidature)</span></label>
                 <label class="opt"><input type="radio" name="q1" value="Simple renseignement" /><span class="opt-txt">ℹ️
                     Je me renseigne — pas de projet immédiat</span></label>
+                <label class="opt"><input type="radio" name="q1" value="Fournisseur" /><span class="opt-txt">📦 Je suis
+                    fournisseur — je souhaite vous présenter mes produits</span></label>
               </div>
             </div>
             <p class="ferr" id="e-q1" role="alert" hidden>Veuillez sélectionner une option.</p>
           </div>
 
           <!-- ─── Q2 Accordion ─── -->
-          <div class="acc" data-name="q2">
+          <div class="acc hidden-q" data-name="q2">
             <button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-q2" id="btn-q2">
               <span class="acc-n font-display">02</span>
               <div class="acc-mid">
@@ -437,7 +439,7 @@
           </div>
 
           <!-- ─── Q3 Accordion ─── -->
-          <div class="acc" data-name="q3">
+          <div class="acc hidden-q" data-name="q3">
             <button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-q3" id="btn-q3">
               <span class="acc-n font-display">03</span>
               <div class="acc-mid">
@@ -465,10 +467,10 @@
           </div>
 
           <!-- Séparateur -->
-          <div class="f-sep"></div>
+          <div class="f-sep hidden-q"></div>
 
           <!-- ─── Coordonnées ─── -->
-          <fieldset class="coords">
+          <fieldset class="coords hidden-q">
             <legend class="coords-leg font-display">Vos coordonnées</legend>
             <div class="fgrid">
 
