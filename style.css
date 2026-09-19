@@ -1073,8 +1073,8 @@ ul {
   align-items: center;
   gap: 0.4rem;
   color: #C8181A;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 700;
+  font-size: 1.1rem;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -1090,9 +1090,9 @@ ul {
   gap: 0.5rem;
   background: #25D366;
   color: #fff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.55rem 1rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
   text-decoration: none;
   transition: background 0.2s;

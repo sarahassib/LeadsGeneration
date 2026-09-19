@@ -359,12 +359,15 @@ const CONFIG = {
     }
   });
 
-  /* ── Logique show/hide Q2, Q3, séparateur, coordonnées ── */
+  /* ── Logique show/hide Q1, Q2, Q3, séparateur, coordonnées, submit ── */
+  const q1Acc = document.querySelector('.acc[data-name="q1"]');
   const q2Acc = document.querySelector('.acc[data-name="q2"]');
   const q3Acc = document.querySelector('.acc[data-name="q3"]');
   const fSep = document.querySelector('.f-sep');
   const coordsField = document.querySelector('.coords');
-  const hideTargets = [q2Acc, q3Acc, fSep, coordsField].filter(Boolean);
+  const subBtn = document.getElementById('sub-btn');
+  const rgpdText = document.querySelector('.rgpd');
+  const hideTargets = [q1Acc, q2Acc, q3Acc, fSep, coordsField, subBtn, rgpdText].filter(Boolean);
 
   /* ── Cartes info (candidature / fournisseur) ── */
   const cardCandidature = document.getElementById('card-candidature');
@@ -375,7 +378,7 @@ const CONFIG = {
     const val = q1Checked ? q1Checked.value : '';
     const shouldHide = (val === 'Candidature' || val === 'Fournisseur');
 
-    /* Masque/affiche Q2, Q3, séparateur, coordonnées */
+    /* Masque/affiche Q1, Q2, Q3, séparateur, coordonnées, bouton submit, RGPD */
     hideTargets.forEach(el => {
       el.classList.toggle('hidden-q', shouldHide);
     });
