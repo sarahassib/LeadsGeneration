@@ -134,6 +134,76 @@ ul {
   background: var(--red);
 }
 
+/* ═══ Section Logos Clients — Banneau défilant ═══ */
+.logos-section {
+  background: #111;
+  padding: 3rem 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.logos-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logos-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 2rem;
+}
+
+.logos-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-logos 25s linear infinite;
+}
+
+.logos-track:hover {
+  animation-play-state: paused;
+}
+
+.logos-slide {
+  display: flex;
+  gap: 4rem;
+  padding: 0 2rem;
+}
+
+.logo-item {
+  flex-shrink: 0;
+  width: 140px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.logo-item:hover {
+  background: rgba(200, 24, 24, 0.1);
+  border-color: rgba(200, 24, 24, 0.3);
+}
+
+@keyframes scroll-logos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .sec-dark {
   background: var(--dark-2);
   padding: 5.5rem 0;
