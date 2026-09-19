@@ -366,14 +366,23 @@ const CONFIG = {
   const coordsField = document.querySelector('.coords');
   const hideTargets = [q2Acc, q3Acc, fSep, coordsField].filter(Boolean);
 
+  /* ── Cartes info (candidature / fournisseur) ── */
+  const cardCandidature = document.getElementById('card-candidature');
+  const cardFournisseur = document.getElementById('card-fournisseur');
+
   function updateFormVisibility() {
     const q1Checked = document.querySelector('input[name="q1"]:checked');
     const val = q1Checked ? q1Checked.value : '';
     const shouldHide = (val === 'Candidature' || val === 'Fournisseur');
 
+    /* Masque/affiche Q2, Q3, séparateur, coordonnées */
     hideTargets.forEach(el => {
       el.classList.toggle('hidden-q', shouldHide);
     });
+
+    /* Affiche la carte correspondante */
+    if (cardCandidature) cardCandidature.classList.toggle('hidden-q', val !== 'Candidature');
+    if (cardFournisseur) cardFournisseur.classList.toggle('hidden-q', val !== 'Fournisseur');
   }
 
   /* Écoute les changements sur Q1 */

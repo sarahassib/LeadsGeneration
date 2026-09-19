@@ -1026,6 +1026,83 @@ ul {
 /* Éléments cachés dynamiquement (candidature / fournisseur) */
 .hidden-q { display: none !important; }
 
+/* Cartes d'information (candidature / fournisseur) */
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(200, 24, 24, 0.08);
+  border: 1px solid rgba(200, 24, 24, 0.25);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-card-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: rgba(200, 24, 24, 0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.info-card-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.info-card-desc {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.info-card-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #C8181A;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.info-card-email:hover {
+  color: #ff4444;
+  text-decoration: underline;
+}
+
+.info-card-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #25D366;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+  width: fit-content;
+}
+
+.info-card-wa:hover {
+  background: #1ebe57;
+}
+
 /* Coordonnées */
 .coords {
   border: none;
