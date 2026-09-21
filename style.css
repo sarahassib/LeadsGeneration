@@ -194,6 +194,12 @@ ul {
   transition: background 0.3s, border-color 0.3s;
 }
 
+.logo-item img {
+  max-width: 80%;
+  max-height: 50px;
+  object-fit: contain;
+}
+
 .logo-item:hover {
   background: rgba(200, 24, 24, 0.1);
   border-color: rgba(200, 24, 24, 0.3);
